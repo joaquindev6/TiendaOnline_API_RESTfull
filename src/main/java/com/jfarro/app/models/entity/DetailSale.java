@@ -1,5 +1,7 @@
 package com.jfarro.app.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,9 +33,11 @@ public class DetailSale implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Product products;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_venta")
+    @JsonBackReference
     private Sale sale;
 }

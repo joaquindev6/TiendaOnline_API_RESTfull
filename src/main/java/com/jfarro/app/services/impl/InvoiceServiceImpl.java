@@ -6,6 +6,8 @@ import com.jfarro.app.models.entity.Sale;
 import com.jfarro.app.repositories.DetailSaleRepository;
 import com.jfarro.app.repositories.SaleRepository;
 import com.jfarro.app.services.InvoiceService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,12 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Transactional(readOnly = true)
     public List<Sale> findAllSales() {
         return this.saleRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Sale> findAllPagesSales(Pageable pageable) {
+        return this.saleRepository.findAll(pageable);
     }
 
     @Override
@@ -65,6 +73,12 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Transactional(readOnly = true)
     public List<DetailSale> findAllDetailSale() {
         return this.detailSaleRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<DetailSale> findAllPagesDetailSales(Pageable pageable) {
+        return this.detailSaleRepository.findAll(pageable);
     }
 
     @Override

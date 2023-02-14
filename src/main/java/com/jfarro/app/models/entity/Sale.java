@@ -1,5 +1,7 @@
 package com.jfarro.app.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -33,8 +35,10 @@ public class Sale implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Client client;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "sale")
+    @JsonManagedReference //Evita el recursive infinite
     private List<DetailSale> detailSales;
 }

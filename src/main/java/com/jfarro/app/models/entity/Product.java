@@ -1,5 +1,6 @@
 package com.jfarro.app.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -35,10 +36,12 @@ public class Product implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sub_categoria")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private SubCategory subCategory;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_marca")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Mark mark;
 
     @Embedded

@@ -11,6 +11,8 @@ import com.jfarro.app.repositories.MarkRepository;
 import com.jfarro.app.repositories.ProductRepository;
 import com.jfarro.app.repositories.SubCategoryRepository;
 import com.jfarro.app.services.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +39,12 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public List<Product> findAllProducts() {
         return this.productRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Product> findAllPagesProducts(Pageable pageable) {
+        return this.productRepository.findAll(pageable);
     }
 
     @Override
@@ -75,6 +83,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
+    public Page<SubCategory> findAllPagesSubCategory(Pageable pageable) {
+        return this.subCategoryRepository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<SubCategory> findByIdSubCategory(Long id) {
         if (id == null || id <= 0) {
             throw new FindByIdException("Error findByIdSubCategory: El ID no puede ser null o menor igual a 0");
@@ -109,6 +123,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
+    public Page<Category> findAllPagesCategory(Pageable pageable) {
+        return this.categoryRepository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<Category> findByIdCategory(Long id) {
         if (id == null || id <= 0) {
             throw new FindByIdException("Error findByIdCategory: El ID no puede ser null o menor igual a 0");
@@ -139,6 +159,12 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public List<Mark> findAllMarks() {
         return this.markRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Mark> findAllPagesMarks(Pageable pageable) {
+        return this.markRepository.findAll(pageable);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.jfarro.app.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class SubCategory implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
 
     @Embedded

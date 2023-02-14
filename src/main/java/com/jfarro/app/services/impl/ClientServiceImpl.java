@@ -7,6 +7,8 @@ import com.jfarro.app.models.entity.DocumentType;
 import com.jfarro.app.repositories.ClientRepository;
 import com.jfarro.app.repositories.DocumentTypeRepository;
 import com.jfarro.app.services.ClientService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,12 @@ public class ClientServiceImpl implements ClientService {
     @Transactional(readOnly = true)
     public List<Client> findAllClient() {
         return this.clientRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Client> findAllPagesClient(Pageable pageable) {
+        return this.clientRepository.findAll(pageable);
     }
 
     @Override
@@ -62,6 +70,12 @@ public class ClientServiceImpl implements ClientService {
     @Transactional(readOnly = true)
     public List<DocumentType> findAllDocumentTypes() {
         return this.documentTypeRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<DocumentType> findAllDocumentType(Pageable pageable) {
+        return this.documentTypeRepository.findAll(pageable);
     }
 
     @Override
