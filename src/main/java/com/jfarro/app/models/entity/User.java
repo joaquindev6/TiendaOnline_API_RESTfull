@@ -1,7 +1,5 @@
 package com.jfarro.app.models.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

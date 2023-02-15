@@ -2,6 +2,8 @@ package com.jfarro.app.models.entity;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,18 +21,23 @@ public class Client implements Serializable {
     private Long id;
 
     @Column(name = "nombres")
+    @NotBlank
     private String names;
 
     @Column(name = "ape_paterno")
+    @NotBlank
     private String apePat;
 
     @Column(name = "ape_materno")
+    @NotBlank
     private String apeMat;
 
     @Column(name = "nro_documento")
+    @NotBlank
     private String nroDocu;
 
     @Column(name = "email")
+    @NotBlank
     private String email;
 
     @Column(name = "observacion")
@@ -38,6 +45,7 @@ public class Client implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "id_tipo_documento")
+    @NotNull
     private DocumentType documentType;
 
     @Embedded

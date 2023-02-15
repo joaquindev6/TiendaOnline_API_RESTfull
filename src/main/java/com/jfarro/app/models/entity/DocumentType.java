@@ -1,6 +1,7 @@
 package com.jfarro.app.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,5 +19,6 @@ public class DocumentType implements Serializable {
     private Long id;
 
     @Column(name = "nombre")
+    @NotBlank
     private String name;
 }

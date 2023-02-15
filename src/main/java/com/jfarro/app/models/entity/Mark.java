@@ -2,6 +2,7 @@ package com.jfarro.app.models.entity;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class Mark implements Serializable {
     private Long id;
 
     @Column(name = "nombre")
+    @NotBlank
     private String name;
 
     @Column(name = "descripcion")

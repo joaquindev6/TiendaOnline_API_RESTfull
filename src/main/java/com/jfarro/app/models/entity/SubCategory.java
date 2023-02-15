@@ -3,6 +3,8 @@ package com.jfarro.app.models.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -20,6 +22,7 @@ public class SubCategory implements Serializable {
     private Long id;
 
     @Column(name = "nombre")
+    @NotBlank
     private String name;
 
     @Column(name = "descripcion")
@@ -27,6 +30,7 @@ public class SubCategory implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
+    @NotNull
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
 
