@@ -1,7 +1,7 @@
 <h1>Sistema API RESTfull</h1>
 <p>Sistema de prueba API RESTfull creado con en lenguaje de programación Java 17 y con el framework Spring Boot.</p>
 <p>Servidor Tomcat embebido de Spring Boot y servidor de base de datos MySQL8.</p>
-<h2>:white_check_mark: Contenido del sistema</h2>
+<h2>:white_check_mark: Contenido de la Aplicación</h2>
 <p>La aplicación tiene las siguientes características:</p>
 <ul>
   <li>
