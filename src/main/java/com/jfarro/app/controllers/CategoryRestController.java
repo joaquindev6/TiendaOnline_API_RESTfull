@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class CategoryRestController {
      * @return Json con la estructura de User {@Link Category}
      */
     @GetMapping
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<List<Category>> listar() {
         return ResponseEntity.ok(this.productService.findAllCategories());
     }
@@ -42,6 +44,7 @@ public class CategoryRestController {
      * @return Json con la estructura {@Link Category}
      */
     @GetMapping("/pagination")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<List<Category>> listPages(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
@@ -57,6 +60,7 @@ public class CategoryRestController {
      * @return Json con la estructura o con los mensajes de validacion {@Link Category}
      */
     @GetMapping("/{id}")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
         Map<String, Object> data = new HashMap<>();
 
@@ -82,6 +86,7 @@ public class CategoryRestController {
      * @return Json con la estructura o con los mensajes de validacion {@Link Category}
      */
     @PostMapping
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> persistAndUpdate(@RequestBody @Valid Category category, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -108,6 +113,7 @@ public class CategoryRestController {
      * @return Json con el mensaje de confirmacion
      */
     @GetMapping("/state/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> updateState(@PathVariable("id") Long id) {
         Map<String, Object> data = new HashMap<>();
 

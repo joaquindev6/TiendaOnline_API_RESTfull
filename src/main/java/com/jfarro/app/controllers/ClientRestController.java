@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class ClientRestController {
      * @return Json con la estructura {@Link Client}
      */
     @GetMapping
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<List<Client>> list() {
         return ResponseEntity.ok(this.clientService.findAllClient());
     }
@@ -42,6 +44,7 @@ public class ClientRestController {
      * @return Json con la estructura {@link Client}
      */
     @GetMapping("/pagination")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<List<Client>> listPage(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
@@ -57,6 +60,7 @@ public class ClientRestController {
      * @return Json con la estructura o con los mensajes de validacion {@Link Client}
      */
     @GetMapping("/{id}")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
         if (id <= 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -79,6 +83,7 @@ public class ClientRestController {
      * @return Json con la estructura o con los mensajes de validacion {@Link Client}
      */
     @PostMapping
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> persistAndUpdate(@RequestBody @Valid Client client, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<Object, Object> errors = new HashMap<>();
@@ -102,6 +107,7 @@ public class ClientRestController {
      * @return Json con el mensaje de confirmacion
      */
     @GetMapping("/state/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> updateState(@PathVariable("id") Long id) {
         Map<String, Object> data = new HashMap<>();
 

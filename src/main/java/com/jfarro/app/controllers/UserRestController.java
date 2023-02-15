@@ -82,7 +82,7 @@ public class UserRestController {
      * @param bindingResult valida los datos que pasan
      * @return Json con la estructura o con los mensajes de validacion {@Link User}
      */
-    @PostMapping("/probando")
+    @PostMapping
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> persistAndUpdate(@RequestBody @Valid User user, BindingResult bindingResult) {
 
@@ -112,8 +112,8 @@ public class UserRestController {
      * @param id identificador del usuario
      * @return Json con el mensaje de confirmacion
      */
-    @Secured({"ROLE_ADMIN"})
     @GetMapping("/state/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> updateState(@PathVariable("id") Long id) {
         Map<String, Object> data = new HashMap<>();
 

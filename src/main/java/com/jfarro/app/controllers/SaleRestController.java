@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class SaleRestController {
      * @return Json con la estructura de User {@Link Sale}
      */
     @GetMapping
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<List<Sale>> listar() {
         return ResponseEntity.ok(this.invoiceService.findAllSales());
     }
@@ -42,6 +44,7 @@ public class SaleRestController {
      * @return Json con la estructura {@Link Sale}
      */
     @GetMapping("/pagination")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<List<Sale>> listPages(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
@@ -57,6 +60,7 @@ public class SaleRestController {
      * @return Json con la estructura o con los mensajes de validacion {@Link Sale}
      */
     @GetMapping("/{id}")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
         Map<String, Object> data = new HashMap<>();
 
@@ -81,6 +85,7 @@ public class SaleRestController {
      * @return Json con la estructura o con los mensajes de validacion {@Link Sale}
      */
     @PostMapping
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> persistAndUpdate(@RequestBody @Valid Sale sale, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -107,6 +112,7 @@ public class SaleRestController {
      * @return Json con el mensaje de confirmacion
      */
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Object> updateState(@PathVariable("id") Long id) {
         Map<String, Object> data = new HashMap<>();
 

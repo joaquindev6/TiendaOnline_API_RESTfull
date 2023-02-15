@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class DocumentTypeRestController {
      * @return Json con la estructura {@Link DocumentType}
      */
     @GetMapping
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<List<DocumentType>> list() {
         return ResponseEntity.ok(this.clientService.findAllDocumentTypes());
     }
@@ -39,6 +41,7 @@ public class DocumentTypeRestController {
      * @return Json con la estructura {@Link DocumentType}
      */
     @GetMapping("/pagination")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<List<DocumentType>> listPage(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
@@ -54,6 +57,7 @@ public class DocumentTypeRestController {
      * @return Json con la estructura o con los mensajes de validacion {@Link DocumentType}
      */
     @GetMapping("/{id}")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
         if (id <= 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
