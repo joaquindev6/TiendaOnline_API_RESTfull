@@ -23,7 +23,7 @@
   <li>Repositorios</li>
   <li>Servicios</li>
   <li>Controladores</li>
-  <li>Manejo de los datos a traves de JSON</li>
+  <li>Manejo de los datos a través de JSON</li>
   <li>Conexión con la base de datos MySQL8</li>
   <li>CRUD para todas las entidades</li>
   <li>Autenticación y autorización con Spring Security</li>
