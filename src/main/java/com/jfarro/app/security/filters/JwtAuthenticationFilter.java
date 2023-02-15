@@ -5,6 +5,7 @@ import com.jfarro.app.security.UserCredentials;
 import com.jfarro.app.security.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -70,6 +71,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         String token = this.jwtService.createToken(authResult);
+
+        Cookie cookie = new Cookie("token", token);
+        response.addCookie(cookie);
 
         response.setHeader("Authorization", HEADER_FORMAT.concat(token));
 

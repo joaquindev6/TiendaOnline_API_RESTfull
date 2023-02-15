@@ -1,7 +1,6 @@
 package com.jfarro.app.security.filters;
 
 import com.jfarro.app.security.services.JwtService;
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +25,14 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         this.jwtService = jwtService;
     }
 
+    /**
+     * Valida el token para dar acceso a las peticiones
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = request.getHeader("Authorization");

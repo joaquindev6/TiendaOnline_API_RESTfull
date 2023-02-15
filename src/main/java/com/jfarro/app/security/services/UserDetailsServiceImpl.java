@@ -18,6 +18,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userService = userService;
     }
 
+    /**
+     * Obtengo el usuario a traves del username y lo registro en el UserDetails
+     * @param username
+     * @return objeto de tipo UserDatails
+     * @throws UsernameNotFoundException
+     */
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

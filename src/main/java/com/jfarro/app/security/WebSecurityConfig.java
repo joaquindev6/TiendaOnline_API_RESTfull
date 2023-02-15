@@ -35,6 +35,12 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Configura y administra la autenticacion de los usuarios
+     * @param httpSecurity
+     * @return objeto de tipo AuthenticationManager
+     * @throws Exception
+     */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
@@ -43,6 +49,13 @@ public class WebSecurityConfig {
                 .and().build();
     }
 
+    /**
+     * Filtra la autenticacion y la autorizacion por medio del token de JWT
+     * @param http
+     * @param authenticationManager
+     * @return objeto de tipo SecurityFilterChain
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         return http.csrf().disable()
